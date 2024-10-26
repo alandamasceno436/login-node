@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    nome de usuario
+    <input type="text" id="nome"> 
+        senha
+   <input type="text" id="senha"> 
+    <button onclick= "criarusuario()">
+cadastrar
+    </button>
+
+    <button onclick= "login()">
+       entrar
+            </button>
+    <script>
+  async function login(){
+        const name = document.getElementById('nome').value
+        const password = document.getElementById('senha').value;
+
+        const user = {
+            name, 
+            password
+        }
+         
+        const resposta = await fetch('http://localhost:3333/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(user)
+            
+            })
+            const podeentrar =  await resposta.json()
+            alert(podeentrar);
+
+    }
+
+      async function criarusuario(){
+        const name = document.getElementById('nome').value
+        const password = document.getElementById('senha').value;
+
+        const user = {
+            name, 
+            password
+        }
+         
+        const resposta = await fetch('http://localhost:3333/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(user)
+            
+            })
+            await resposta.json()
+        
+        alert('usuario criado com sucesso');
+    }
+
+</script>
+</body>
+</html>
